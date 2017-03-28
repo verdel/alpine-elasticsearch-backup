@@ -1,0 +1,25 @@
+actions:
+    1:
+        action: snapshot
+        description: "Create snapshot"
+        options:
+            repository: "{{ ELASTICSEARCH_REPOSITORY_NAME | default('backup') }}"
+            wait_for_completion: true
+        filters:
+            - filtertype: pattern
+              kind: prefix
+              value: "{{ ELASTICSEARCH_INDEX_PREFIX }}"
+    2:
+        action: delete_snapshots
+        description: "Delete old snapshots from repository"
+        options:
+            repository: "{{ ELASTICSEARCH_REPOSITORY_NAME | default('backup') }}"
+            continue_if_exception: True
+            ignore_empty_list: True
+        filters:
+            - filtertype: age
+              source: creation_date
+              direction: older
+              unit: days
+              unit_count: 10
+              exclude:
