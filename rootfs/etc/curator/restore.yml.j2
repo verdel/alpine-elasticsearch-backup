@@ -18,6 +18,7 @@ actions:
             name: "{{ ELASTICSEARCH_SNAPSHOT_NAME | default("") }}"
             indices:
             wait_for_completion: true
+            skip_repo_fs_check: true
         filters:
             - filtertype: state
               state: SUCCESS

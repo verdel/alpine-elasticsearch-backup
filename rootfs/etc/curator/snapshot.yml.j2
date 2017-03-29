@@ -5,6 +5,7 @@ actions:
         options:
             repository: "{{ ELASTICSEARCH_REPOSITORY_NAME | default('backup') }}"
             wait_for_completion: true
+            skip_repo_fs_check: true
         filters:
             - filtertype: pattern
               kind: prefix
