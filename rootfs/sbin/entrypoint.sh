@@ -28,7 +28,7 @@ fi
 
 # Create backup repository if not exist
 es_repo_mgr --config /etc/curator/curator.yml show | grep '${ELASTICSEARCH_REPOSITORY_NAME}' &> /dev/null
-if [ $? == 0 ]; then
+if [ $? != 0 ]; then
     es_repo_mgr --config /etc/curator/curator.yml create fs --repository ${ELASTICSEARCH_REPOSITORY_NAME} --location ${ELASTICSEARCH_REPOSITORY_PATH} --compression true
 fi
 
